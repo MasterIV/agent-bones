@@ -1,9 +1,9 @@
-define(['lib/scene', 'basic/button', 'core/game', 'geo/v2', 'transitions/slideinright', 'basic/morph', 'definition/easing', 'basic/layout'],
-	function(Scene, Button, game, V2, SlideInRightTransition, Morph, Easing, Layout) {
+define(['lib/scene', 'basic/button', 'core/game', 'geo/v2', 'transitions/slideinright', 'basic/morph', 'definition/easing', 'basic/layout', 'scenes/play'],
+	function(Scene, Button, game, V2, SlideInRightTransition, Morph, Easing, Layout, PlayScene) {
 		function MenuScene() {
 			Scene.call(this);
 
-			var playButton = Button.create(new V2(0, 680), function() { game.scene = require('config/scenes').play; }).rect(280, 80).text("Play");
+			var playButton = Button.create(new V2(0, 680), function() { game.scene = new PlayScene(100); }).rect(280, 80).text("Play");
 			var creditsButton = Button.create(new V2(0, 680), function() { game.scene = new SlideInRightTransition(require('config/scenes').credits, 1000, Easing.OUTQUAD); }).rect(360, 80).text("Credits");
 			var helpButton = Button.create(new V2(0, 680), function() { game.scene = require('config/scenes').help; }).rect(300, 80).text("Help");
 			var particlesButton = Button.create(new V2(0, 680), function() { game.scene = require('config/scenes').particles; }).rect(300, 80).text("Particles");

@@ -119,7 +119,9 @@ define(['basic/entity', 'core/graphic', 'geo/v2'],
 			};
 
 			TiledMap.prototype.toTile = function(pos) {
-				return pos.clone().grid(this.tile.x, this.tile.y);
+				var result = pos.clone();
+				result.grid(this.tile.x, this.tile.y);
+				return result;
 			};
 
 			TiledMap.prototype.getLayer = function(name) {
@@ -130,12 +132,16 @@ define(['basic/entity', 'core/graphic', 'geo/v2'],
 			};
 
 			TiledMap.prototype.blocked = function(pos) {
+				return this.has(pos, 'collision');
+			};
+
+			TiledMap.prototype.has = function(pos, property) {
 				if( pos.x < 0 || pos.y < 0 || pos.x >= this.width || pos.y >= this.height )
 					return true;
 
 				for(var i in this.layers) {
 					var l = this.layers[i];
-					if(l.collision && l.data && l.data[pos.x + (pos.y * l.width)])
+					if(l.properties[property] && l.data && l.data[pos.x + (pos.y * l.width)])
 						return true;
 				}
 
