@@ -4,11 +4,11 @@ define(['lib/scene', 'entity/player', 'lib/map', 'lib/viewport', 'basic/rect', '
 				Scene.call(this);
 
 
+				this.viewport = new ViewPort(true);
 				var map = new TiledMap('map');
-				var player = new Player(new V2(640, 670), 100, map);
+				var player = new Player(new V2(640, 670), 100, map, this.viewport);
 
 				this.speed = speed;
-				this.viewport = new ViewPort(true);
 				this.viewport.add(map.render());
 				this.viewport.add(player);
 

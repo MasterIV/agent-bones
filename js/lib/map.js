@@ -132,20 +132,27 @@ define(['basic/entity', 'core/graphic', 'geo/v2'],
 			};
 
 			TiledMap.prototype.blocked = function(pos) {
-				return this.has(pos, 'collision');
+				return this.has(pos, 'collision', true);
 			};
 
-			TiledMap.prototype.has = function(pos, property) {
-				if( pos.x < 0 || pos.y < 0 || pos.x >= this.width || pos.y >= this.height )
-					return true;
+			TiledMap.prototype.has = function(pos, property, def) {
+				var flags = this.flags(pos);
+				return flags[property] ? flags[property] : def;
+			};
 
+			TiledMap.prototype.flags = function(pos) {
+				if( pos.x < 0 || pos.y < 0 || pos.x >= this.width || pos.y >= this.height )
+					return {};
+
+				var result = {};
 				for(var i in this.layers) {
 					var l = this.layers[i];
-					if(l.properties[property] && l.data && l.data[pos.x + (pos.y * l.width)])
-						return true;
+					if(l.data && l.data[pos.x + (pos.y * l.width)])
+						for(var p in l.properties)
+							if(!result[p]) result[p] = l.properties[p];
 				}
 
-				return false;
+				return result;
 			};
 
 			// is this needed? i don't know
