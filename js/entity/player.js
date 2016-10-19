@@ -1,9 +1,10 @@
-define(['basic/entity', 'geo/v2', 'geo/rect', 'config/colors', 'basic/rect', 'core/graphic', 'core/game'],
-	function(Entity, V2, Rect, colors, RectEntity, graphics, game) {
+define(['basic/entity', 'geo/v2', 'geo/rect', 'config/colors', 'basic/image', 'core/graphic', 'core/game'],
+	function(Entity, V2, Rect, colors, ImageEntity, graphics, game) {
+		graphics.add('img/asset_agent.png');
 		var jumpSpeed = 400;
 		var gravity = .6;
 
-		var size = new V2(40, 80);
+		var size = new V2(40, 78);
 		var area = new Rect(size.prd(-1), size);
 
 		function Player(pos, speed, map, viewport) {
@@ -16,7 +17,7 @@ define(['basic/entity', 'geo/v2', 'geo/rect', 'config/colors', 'basic/rect', 'co
 
 			this.grounded = true;
 
-			this.add(new RectEntity(size.prd(-1), size, colors.player));
+			this.add(new ImageEntity(size.prd(-1), 'img/asset_agent.png'));
 		}
 
 		Player.prototype = new Entity();
