@@ -1,7 +1,6 @@
-define(['lib/scene', 'entity/player', 'lib/map', 'lib/viewport', 'basic/rect', 'config/colors', 'geo/v2', 'core/graphic'],
-		function(Scene, Player, TiledMap, ViewPort, RectEntity, colors, V2, graphics ) {
+define(['lib/scene', 'entity/player', 'lib/map', 'lib/viewport', 'basic/rect', 'config/colors', 'geo/v2', 'core/graphic', 'entity/background'],
+		function(Scene, Player, TiledMap, ViewPort, RectEntity, colors, V2, graphics, Background ) {
 			graphics.add('img/bg.jpg');
-
 			function PlayScene(speed) {
 				Scene.call(this);
 				this.bg = 'img/bg.jpg';
@@ -11,6 +10,7 @@ define(['lib/scene', 'entity/player', 'lib/map', 'lib/viewport', 'basic/rect', '
 				var player = new Player(new V2(640, 670), 100, map, this.viewport);
 
 				this.speed = speed;
+				this.viewport.add(new Background(map.size.x));
 				this.viewport.add(map.render());
 				this.viewport.add(player);
 
