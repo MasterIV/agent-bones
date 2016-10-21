@@ -8,7 +8,7 @@ define(['lib/scene', 'basic/button', 'core/game', 'geo/v2', 'basic/layout', 'sce
 		function MenuScene() {
 			Scene.call(this);
 			this.bg = 'img/bg.jpg';
-			this.add(new Background(1));
+			this.add(new Background(.5));
 
 			var playButton = Button.create(Zero(), function() { game.scene = new PlayScene(100); }).img('img/asset_start_button.png', 1);
 			var creditsButton = Button.create(Zero(), function() { game.scene = require('config/scenes').credits}).img('img/asset_credits_button.png', 1);
