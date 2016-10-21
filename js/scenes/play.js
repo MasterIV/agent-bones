@@ -10,11 +10,11 @@ define(['lib/scene', 'entity/player', 'lib/map', 'lib/viewport', 'basic/rect', '
 				var player = new Player(new V2(640, 670), 100, map, this.viewport);
 
 				this.speed = speed;
-				this.viewport.add(new Background(map.size.x));
 				this.viewport.add(map.render());
 				this.viewport.add(player);
 
 
+				this.add(new Background(1));
 				this.add(this.viewport);
 				this.keyAware.push(player);
 			}
